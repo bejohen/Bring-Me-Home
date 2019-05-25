@@ -165,11 +165,13 @@ extension GameScene{
         return taptoplayLbl
     }
     
-    func createObstacle() -> SKSpriteNode  {
+    func createObstacle(position: CGPoint, alpha: CGFloat, rotation: CGFloat) -> SKSpriteNode  {
         let obstacle = SKSpriteNode(texture: SKTexture(imageNamed: "obstacle"))
         
-        obstacle.position = CGPoint(x: -443.436, y: -156.058)
-
+        obstacle.position = position
+        obstacle.alpha = alpha
+        obstacle.zRotation = rotation
+        
         obstacle.setScale(0.2)
         obstacle.name = "obstacle"
         

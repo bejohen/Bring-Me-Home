@@ -25,8 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var logoImg = SKSpriteNode()
     var groundPair = SKNode()
     var moveAndRemove = SKAction()
-    
-    var obstacle = SKSpriteNode()
+    var obstacle = SKNode()
     
     var buttonRight = SKSpriteNode()
     var buttonLeft = SKSpriteNode()
@@ -57,8 +56,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func collisionBetween(player: SKNode, object: SKNode) {
         
-        var actionArray = [SKAction]()
-        actionArray.append(SKAction.moveTo(x: self.position.x + 1000, duration: 0.5))
         if object.name == "ground" {
             print("collision with ground")
         } else if object.name == "obstacle" && !isGameOver {
@@ -170,6 +167,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func restartScene(){
         self.removeAllChildren()
+        self.obstacle.removeAllChildren()
         self.removeAllActions()
         isGameOver = false
         gameStarted = false
@@ -223,7 +221,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.player = createPlayer()
         self.addChild(player)
         
-        self.obstacle = createObstacle()
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: -443.436, y: -156.058), alpha: 1, rotation: 0))
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: -116.058), alpha: 0, rotation: -(CGFloat.pi/2)))
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: 0), alpha: 0, rotation: -(CGFloat.pi/2)))
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: 116.058), alpha: 0, rotation: -(CGFloat.pi/2)))
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: 116.058*2), alpha: 0, rotation: -(CGFloat.pi/2)))
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: 116.058*3), alpha: 0, rotation: -(CGFloat.pi/2)))
+
         self.addChild(obstacle)
         
         createRightBtn()
