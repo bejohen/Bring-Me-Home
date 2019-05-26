@@ -29,7 +29,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var moveAndRemove = SKAction()
     var obstacle = SKNode()
     
+    var jatoh = SKSpriteNode()
+    
+    var cloud = SKNode()
+    var thunder = SKSpriteNode()
+    
     var trigger = SKSpriteNode()
+    var triggerL = SKSpriteNode()
+    var triggerJ = SKSpriteNode()
     
     var buttonRight = SKSpriteNode()
     var buttonLeft = SKSpriteNode()
@@ -37,6 +44,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var isGameOver = false
     var player = SKSpriteNode()
+    
+    var jatohTrigger = false
     
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
@@ -81,6 +90,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.player.removeAllActions()
             createGameOverText(text: "You Win!", miniText: "Play Again?")
             createRestartBtn()
+        } else if object.name == "thunder" && !isGameOver {
+            print("collision with thunder")
+            isGameOver = true
+            self.player.texture = SKTexture(imageNamed: "chibi-lose")
+            self.player.removeAllActions()
+            createGameOverText(text: "You Lose! :(", miniText: "Try Again?")
+            createRestartBtn()
+            let grin = SKLabelNode()
+            grin.position = CGPoint(x: 350, y: 250)
+            grin.text = "🤪"
+            grin.zPosition = 5
+            self.addChild(grin)
+        } else if object.name == "triggerLightning" && !isGameOver {
+            print("collision with triggerL")
+            createThunder()
+        }
+        else if object.name == "triggerJatoh" && !isGameOver && !jatohTrigger {
+            print("collision with triggerJ")
+            jatohTrigger = true
+            jatoh = objJatoh()
+            self.addChild(jatoh)
+            jatoh.run(SKAction.moveTo(y: self.position.y - 500, duration: 1))
         }
     }
     
@@ -187,6 +218,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.removeAllActions()
         isGameOver = false
         gameStarted = false
+        jatohTrigger = false
         score = 0
         createScene()
     }
@@ -230,6 +262,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         //self.backgroundColor = SKColor(red: 80.0/255.0, green: 192.0/255.0, blue: 203.0/255.0, alpha: 1.0)
         createBackground()
+        self.cloud = createCloud()
+        self.addChild(cloud)
+
         self.groundPair = self.createGround()
         self.addChild(self.groundPair)
         
@@ -242,14 +277,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.trigger = createTrigger()
         self.addChild(trigger)
         
-        //self.obstacle.addChild(createObstacle(position: CGPoint(x: -400.436, y: -156.058), alpha: 1, rotation: 0))
+        self.triggerL = createTriggerLightning()
+        self.addChild(triggerL)
+        
+        self.triggerJ = createTriggerObsJatoh()
+        self.addChild(triggerJ)
+        
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: -400.436, y: -156.058), alpha: 1, rotation: 0))
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: -20.436, y: -156.058), alpha: 0, rotation: 0))
+        
+        //yg disamping kiri
         self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: -116.058), alpha: 0, rotation: -(CGFloat.pi/2)))
         self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: 0), alpha: 0, rotation: -(CGFloat.pi/2)))
         self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: 116.058), alpha: 0, rotation: -(CGFloat.pi/2)))
         self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: 116.058*2), alpha: 0, rotation: -(CGFloat.pi/2)))
         self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: 116.058*3), alpha: 0, rotation: -(CGFloat.pi/2)))
         
+        //yg diatas
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: -50, y: 290), alpha: 0, rotation: CGFloat.pi))
         
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: 100, y: 200), alpha: 1, rotation: CGFloat.pi))
+        
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: 300, y: 390), alpha: 0, rotation: CGFloat.pi))
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: -500, y: 390), alpha: 0, rotation: CGFloat.pi))
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: 550, y: 150), alpha: 0, rotation: CGFloat.pi))
+        
+        //yg dibawah
         self.obstacle.addChild(createObstacle(position: CGPoint(x: 130, y: -390), alpha: 0, rotation: 0))
         self.obstacle.addChild(createObstacle(position: CGPoint(x: 230, y: -390), alpha: 0, rotation: 0))
         

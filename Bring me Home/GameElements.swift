@@ -14,6 +14,7 @@ struct CollisionBitMask {
     static let triggerCategory:UInt32 = 0x1 << 2
     static let groundCategory:UInt32 = 0x1 << 3
     static let rumahCategory:UInt32 = 0x1 << 4
+    static let thunderCategory:UInt32 = 0x1 << 5
 }
 
 extension GameScene{
@@ -27,8 +28,8 @@ extension GameScene{
         bird.physicsBody?.linearDamping = 1.1
         bird.physicsBody?.restitution = 0
         bird.physicsBody?.categoryBitMask = CollisionBitMask.playerCategory
-        bird.physicsBody?.collisionBitMask = CollisionBitMask.obstacleCategory | CollisionBitMask.triggerCategory | CollisionBitMask.groundCategory | CollisionBitMask.rumahCategory
-        bird.physicsBody?.contactTestBitMask = CollisionBitMask.obstacleCategory | CollisionBitMask.triggerCategory | CollisionBitMask.groundCategory | CollisionBitMask.rumahCategory
+        bird.physicsBody?.collisionBitMask = CollisionBitMask.obstacleCategory | CollisionBitMask.triggerCategory | CollisionBitMask.groundCategory | CollisionBitMask.rumahCategory | CollisionBitMask.thunderCategory
+        bird.physicsBody?.contactTestBitMask = CollisionBitMask.obstacleCategory | CollisionBitMask.triggerCategory | CollisionBitMask.groundCategory | CollisionBitMask.rumahCategory | CollisionBitMask.thunderCategory
         bird.physicsBody?.affectedByGravity = true
         bird.physicsBody?.isDynamic = true
         
@@ -65,6 +66,49 @@ extension GameScene{
         groundPair.addChild(groundRight)
         
         return groundPair
+    }
+    
+    func createCloud() -> SKNode {
+        let cloudA = SKSpriteNode(texture: SKTexture(imageNamed: "awan"))
+        let cloudB = SKSpriteNode(texture: SKTexture(imageNamed: "awan"))
+        let cloudC = SKSpriteNode(texture: SKTexture(imageNamed: "awan"))
+        
+        let cloudPair = SKNode()
+        cloudA.position = CGPoint(x: -400, y: 300)
+        cloudB.position = CGPoint(x: -150, y: 220)
+        cloudC.position = CGPoint(x: 350, y: 280)
+        cloudC.zPosition = 3
+        cloudPair.addChild(cloudA)
+        cloudPair.addChild(cloudB)
+        cloudPair.addChild(cloudC)
+        return cloudPair
+    }
+    
+    func createCloud2() {
+        cloud = SKSpriteNode(texture: SKTexture(imageNamed: "awan"))
+        cloud.position = CGPoint(x: -300, y: 280)
+        cloud.zPosition = 3
+        self.addChild(cloud)
+    }
+    
+    func createThunder() {
+        thunder = SKSpriteNode(texture: SKTexture(imageNamed: "petir"))
+        thunder.position = CGPoint(x: 350, y: 50)
+        thunder.zPosition = 2
+        
+        thunder.name = "thunder"
+        
+        thunder.physicsBody = SKPhysicsBody(rectangleOf: thunder.size)
+        thunder.physicsBody?.categoryBitMask = CollisionBitMask.thunderCategory
+        thunder.physicsBody?.collisionBitMask = CollisionBitMask.playerCategory
+        thunder.physicsBody?.contactTestBitMask = CollisionBitMask.playerCategory
+        thunder.physicsBody?.isDynamic = false
+        thunder.physicsBody?.affectedByGravity = false
+        
+        thunder.alpha = 0
+        
+        self.addChild(thunder)
+        thunder.run(SKAction.fadeAlpha(by: 1, duration: 0.2))
     }
     
     func createRightBtn() {
@@ -212,9 +256,9 @@ extension GameScene{
     func createHome() -> SKSpriteNode  {
         let home = SKSpriteNode(texture: SKTexture(imageNamed: "home"))
         
-        home.position = CGPoint(x:750, y: -30)
+        home.position = CGPoint(x:800, y: -60)
         
-        //home.setScale(0.2)
+        home.setScale(0.8)
         home.name = "home"
         
         home.physicsBody = SKPhysicsBody(rectangleOf: home.size)
@@ -230,7 +274,7 @@ extension GameScene{
     func createTrigger() -> SKSpriteNode  {
         let trigger = SKSpriteNode(texture: SKTexture(imageNamed: "obstacle"))
         
-        trigger.position = CGPoint(x: 0, y: -180)
+        trigger.position = CGPoint(x: 50, y: -180)
         
         trigger.setScale(0.1)
         trigger.name = "trigger"
@@ -244,6 +288,64 @@ extension GameScene{
         trigger.physicsBody?.affectedByGravity = false
         
         return trigger
+    }
+    
+    func createTriggerLightning() -> SKSpriteNode  {
+        let trigger = SKSpriteNode(texture: SKTexture(imageNamed: "obstacle"))
+        
+        trigger.position = CGPoint(x: 350, y: -180)
+        
+        trigger.setScale(0.1)
+        trigger.name = "triggerLightning"
+        trigger.alpha = 0
+        
+        trigger.physicsBody = SKPhysicsBody(rectangleOf: trigger.size)
+        trigger.physicsBody?.categoryBitMask = CollisionBitMask.triggerCategory
+        trigger.physicsBody?.collisionBitMask = CollisionBitMask.playerCategory
+        trigger.physicsBody?.contactTestBitMask = CollisionBitMask.playerCategory
+        trigger.physicsBody?.isDynamic = false
+        trigger.physicsBody?.affectedByGravity = false
+        
+        return trigger
+    }
+    
+    func createTriggerObsJatoh() -> SKSpriteNode  {
+        let trigger = SKSpriteNode(texture: SKTexture(imageNamed: "obstacle"))
+        
+        trigger.position = CGPoint(x: -200, y: -180)
+        
+        trigger.setScale(0.1)
+        trigger.name = "triggerJatoh"
+        trigger.alpha = 0
+        
+        trigger.physicsBody = SKPhysicsBody(rectangleOf: trigger.size)
+        trigger.physicsBody?.categoryBitMask = CollisionBitMask.triggerCategory
+        trigger.physicsBody?.collisionBitMask = CollisionBitMask.playerCategory
+        trigger.physicsBody?.contactTestBitMask = CollisionBitMask.playerCategory
+        trigger.physicsBody?.isDynamic = false
+        trigger.physicsBody?.affectedByGravity = false
+        
+        return trigger
+    }
+    
+    func objJatoh() -> SKSpriteNode {
+        let obstacle = SKSpriteNode(texture: SKTexture(imageNamed: "obstacle"))
+        
+        obstacle.position = CGPoint(x: -150, y: 390)
+        obstacle.alpha = alpha
+        obstacle.zRotation = CGFloat.pi
+        
+        obstacle.setScale(0.2)
+        obstacle.name = "obstacle"
+        
+        obstacle.physicsBody = SKPhysicsBody(rectangleOf: obstacle.size)
+        obstacle.physicsBody?.categoryBitMask = CollisionBitMask.obstacleCategory
+        obstacle.physicsBody?.collisionBitMask = CollisionBitMask.playerCategory
+        obstacle.physicsBody?.contactTestBitMask = CollisionBitMask.playerCategory
+        obstacle.physicsBody?.isDynamic = false
+        obstacle.physicsBody?.affectedByGravity = true
+        
+        return obstacle
     }
     
     func random() -> CGFloat{
