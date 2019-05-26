@@ -16,6 +16,11 @@
 		0D1BE3A8229935CA00528E0E /* buttonRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D1BE3A7229935CA00528E0E /* buttonRight.png */; };
 		0D1BE3AB2299386B00528E0E /* buttonLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D1BE3A92299386B00528E0E /* buttonLeft.png */; };
 		0D1BE3AC2299386B00528E0E /* buttonJump.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D1BE3AA2299386B00528E0E /* buttonJump.png */; };
+		0D4DB065229AD489009FFAA1 /* petir.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4DB061229AD489009FFAA1 /* petir.png */; };
+		0D4DB066229AD489009FFAA1 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4DB062229AD489009FFAA1 /* background.png */; };
+		0D4DB067229AD489009FFAA1 /* awan.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4DB063229AD489009FFAA1 /* awan.png */; };
+		0D4DB06A229AD7DC009FFAA1 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4DB069229AD7DC009FFAA1 /* home.png */; };
+		0D4DB06C229AD851009FFAA1 /* chibi-left.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4DB06B229AD851009FFAA1 /* chibi-left.png */; };
 		0DABA6C52298EC5000F902F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DABA6C42298EC5000F902F5 /* AppDelegate.swift */; };
 		0DABA6C72298EC5000F902F5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0DABA6C62298EC5000F902F5 /* GameScene.sks */; };
 		0DABA6C92298EC5000F902F5 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0DABA6C82298EC5000F902F5 /* Actions.sks */; };
@@ -36,6 +41,11 @@
 		0D1BE3A7229935CA00528E0E /* buttonRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonRight.png; sourceTree = "<group>"; };
 		0D1BE3A92299386B00528E0E /* buttonLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonLeft.png; sourceTree = "<group>"; };
 		0D1BE3AA2299386B00528E0E /* buttonJump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonJump.png; sourceTree = "<group>"; };
+		0D4DB061229AD489009FFAA1 /* petir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = petir.png; sourceTree = "<group>"; };
+		0D4DB062229AD489009FFAA1 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		0D4DB063229AD489009FFAA1 /* awan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = awan.png; sourceTree = "<group>"; };
+		0D4DB069229AD7DC009FFAA1 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		0D4DB06B229AD851009FFAA1 /* chibi-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chibi-left.png"; sourceTree = "<group>"; };
 		0DABA6C12298EC5000F902F5 /* Bring me Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bring me Home.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DABA6C42298EC5000F902F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DABA6C62298EC5000F902F5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -62,6 +72,11 @@
 		0D1BE39A229915DE00528E0E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0D4DB06B229AD851009FFAA1 /* chibi-left.png */,
+				0D4DB069229AD7DC009FFAA1 /* home.png */,
+				0D4DB063229AD489009FFAA1 /* awan.png */,
+				0D4DB062229AD489009FFAA1 /* background.png */,
+				0D4DB061229AD489009FFAA1 /* petir.png */,
 				0D1BE3AA2299386B00528E0E /* buttonJump.png */,
 				0D1BE3A92299386B00528E0E /* buttonLeft.png */,
 				0D1BE3A7229935CA00528E0E /* buttonRight.png */,
@@ -166,6 +181,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D4DB065229AD489009FFAA1 /* petir.png in Resources */,
+				0D4DB066229AD489009FFAA1 /* background.png in Resources */,
+				0D4DB06A229AD7DC009FFAA1 /* home.png in Resources */,
+				0D4DB067229AD489009FFAA1 /* awan.png in Resources */,
+				0D4DB06C229AD851009FFAA1 /* chibi-left.png in Resources */,
 				0DABA6D02298EC5000F902F5 /* Main.storyboard in Resources */,
 				0D1BE3AC2299386B00528E0E /* buttonJump.png in Resources */,
 				0DABA6C72298EC5000F902F5 /* GameScene.sks in Resources */,

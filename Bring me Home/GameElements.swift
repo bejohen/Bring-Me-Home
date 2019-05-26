@@ -13,6 +13,7 @@ struct CollisionBitMask {
     static let obstacleCategory:UInt32 = 0x1 << 1
     static let triggerCategory:UInt32 = 0x1 << 2
     static let groundCategory:UInt32 = 0x1 << 3
+    static let rumahCategory:UInt32 = 0x1 << 4
 }
 
 extension GameScene{
@@ -26,8 +27,8 @@ extension GameScene{
         bird.physicsBody?.linearDamping = 1.1
         bird.physicsBody?.restitution = 0
         bird.physicsBody?.categoryBitMask = CollisionBitMask.playerCategory
-        bird.physicsBody?.collisionBitMask = CollisionBitMask.obstacleCategory | CollisionBitMask.triggerCategory | CollisionBitMask.groundCategory
-        bird.physicsBody?.contactTestBitMask = CollisionBitMask.obstacleCategory | CollisionBitMask.triggerCategory | CollisionBitMask.groundCategory
+        bird.physicsBody?.collisionBitMask = CollisionBitMask.obstacleCategory | CollisionBitMask.triggerCategory | CollisionBitMask.groundCategory | CollisionBitMask.rumahCategory
+        bird.physicsBody?.contactTestBitMask = CollisionBitMask.obstacleCategory | CollisionBitMask.triggerCategory | CollisionBitMask.groundCategory | CollisionBitMask.rumahCategory
         bird.physicsBody?.affectedByGravity = true
         bird.physicsBody?.isDynamic = true
         
@@ -81,6 +82,15 @@ extension GameScene{
         buttonLeft.zPosition = 6
         buttonLeft.alpha = 0.5
         self.addChild(buttonLeft)
+    }
+    
+    func createBackground() {
+        background = SKSpriteNode(imageNamed: "background")
+        background.size = CGSize(width:1792, height:828)
+        background.position = CGPoint(x: 0, y: 0)
+        background.zPosition = -5
+        background.alpha = 1
+        self.addChild(background)
     }
     
     func createJumpBtn() {
@@ -183,6 +193,24 @@ extension GameScene{
         obstacle.physicsBody?.affectedByGravity = false
         
         return obstacle
+    }
+    
+    func createHome() -> SKSpriteNode  {
+        let home = SKSpriteNode(texture: SKTexture(imageNamed: "home"))
+        
+        home.position = CGPoint(x:723, y: -30)
+        
+        //home.setScale(0.2)
+        home.name = "obstacle"
+        
+        home.physicsBody = SKPhysicsBody(rectangleOf: home.size)
+        home.physicsBody?.categoryBitMask = CollisionBitMask.rumahCategory
+        home.physicsBody?.collisionBitMask = CollisionBitMask.playerCategory
+        home.physicsBody?.contactTestBitMask = CollisionBitMask.playerCategory
+        home.physicsBody?.isDynamic = false
+        home.physicsBody?.affectedByGravity = false
+        
+        return home
     }
     
     func random() -> CGFloat{

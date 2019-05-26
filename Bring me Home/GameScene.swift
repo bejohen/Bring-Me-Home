@@ -15,6 +15,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
+    var background = SKSpriteNode()
+    var rumah = SKSpriteNode()
     
     var score = Int(0)
     var scoreLbl = SKLabelNode()
@@ -40,7 +42,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         createScene()
-        self.physicsWorld.contactDelegate = self
+        //self.physicsWorld.contactDelegate = self
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -212,11 +214,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsBody?.affectedByGravity = false
         
         self.physicsWorld.contactDelegate = self
-        self.backgroundColor = SKColor(red: 80.0/255.0, green: 192.0/255.0, blue: 203.0/255.0, alpha: 1.0)
-        
+        //self.backgroundColor = SKColor(red: 80.0/255.0, green: 192.0/255.0, blue: 203.0/255.0, alpha: 1.0)
+        createBackground()
         self.groundPair = self.createGround()
         self.addChild(self.groundPair)
-
+        
+        self.rumah = createHome()
+        self.addChild(rumah)
         
         self.player = createPlayer()
         self.addChild(player)
