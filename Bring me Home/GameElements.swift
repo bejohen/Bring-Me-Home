@@ -21,7 +21,7 @@ extension GameScene{
         let bird = SKSpriteNode(texture: SKTexture(imageNamed: "chibi"))
         bird.name = "player"
         bird.size = CGSize(width: 100, height: 100)
-        bird.position = CGPoint(x:-620.127, y: self.frame.height / 2)
+        bird.position = CGPoint(x:-650, y: 0)
         
         bird.physicsBody = SKPhysicsBody(circleOfRadius: bird.size.width / 2)
         bird.physicsBody?.linearDamping = 1.1
@@ -51,6 +51,7 @@ extension GameScene{
         groundLeft.physicsBody?.contactTestBitMask = CollisionBitMask.playerCategory
         groundLeft.physicsBody?.isDynamic = false
         groundLeft.physicsBody?.affectedByGravity = false
+        groundLeft.name = "gLeft"
         
         groundRight.physicsBody = SKPhysicsBody(rectangleOf: groundRight.size)
         groundRight.physicsBody?.categoryBitMask = CollisionBitMask.groundCategory
@@ -58,6 +59,7 @@ extension GameScene{
         groundRight.physicsBody?.contactTestBitMask = CollisionBitMask.playerCategory
         groundRight.physicsBody?.isDynamic = false
         groundRight.physicsBody?.affectedByGravity = false
+        groundRight.name = "gRight"
         
         groundPair.addChild(groundLeft)
         groundPair.addChild(groundRight)
@@ -104,7 +106,7 @@ extension GameScene{
     
     
     func createRestartBtn() {
-        restartBtn = SKSpriteNode(imageNamed: "buttonJump")
+        restartBtn = SKSpriteNode(imageNamed: "buttonRestart")
         restartBtn.size = CGSize(width:150, height:150)
         restartBtn.position = CGPoint(x: 0, y: 0)
         restartBtn.zPosition = 6
@@ -164,15 +166,27 @@ extension GameScene{
         logoImg.run(SKAction.scale(to: 1.0, duration: 0.3))
     }
     
-    func createTaptoplayLabel() -> SKLabelNode {
-        let taptoplayLbl = SKLabelNode()
-        taptoplayLbl.position = CGPoint(x:self.frame.midX, y:self.frame.midY - 100)
-        taptoplayLbl.text = "Tap anywhere to play"
-        taptoplayLbl.fontColor = UIColor(red: 63/255, green: 79/255, blue: 145/255, alpha: 1.0)
-        taptoplayLbl.zPosition = 5
-        taptoplayLbl.fontSize = 20
-        taptoplayLbl.fontName = "HelveticaNeue"
-        return taptoplayLbl
+    func createGameOverText(text: String, miniText: String) {
+        youWinLbl.position = CGPoint(x:0, y:175)
+        youWinLbl.text = text
+        youWinLbl.fontColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)
+        youWinLbl.zPosition = 5
+        youWinLbl.fontSize = 70
+        youWinLbl.fontName = "SF Pro Text Bold"
+        //youWinLbl.setScale(0)
+        
+        playAgainLbl.position = CGPoint(x:0, y:120)
+        playAgainLbl.text = miniText
+        playAgainLbl.fontColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)
+        playAgainLbl.zPosition = 5
+        playAgainLbl.fontSize = 28
+        playAgainLbl.fontName = "SF Pro Text Medium"
+        //playAgainLbl.setScale(0)
+        
+        self.addChild(youWinLbl)
+        self.addChild(playAgainLbl)
+        //youWinLbl.run(SKAction.scale(to: 1.0, duration: 0.3))
+        //playAgainLbl.run(SKAction.scale(to: 1.0, duration: 0.3))
     }
     
     func createObstacle(position: CGPoint, alpha: CGFloat, rotation: CGFloat) -> SKSpriteNode  {
@@ -198,10 +212,10 @@ extension GameScene{
     func createHome() -> SKSpriteNode  {
         let home = SKSpriteNode(texture: SKTexture(imageNamed: "home"))
         
-        home.position = CGPoint(x:723, y: -30)
+        home.position = CGPoint(x:750, y: -30)
         
         //home.setScale(0.2)
-        home.name = "obstacle"
+        home.name = "home"
         
         home.physicsBody = SKPhysicsBody(rectangleOf: home.size)
         home.physicsBody?.categoryBitMask = CollisionBitMask.rumahCategory
@@ -211,6 +225,25 @@ extension GameScene{
         home.physicsBody?.affectedByGravity = false
         
         return home
+    }
+    
+    func createTrigger() -> SKSpriteNode  {
+        let trigger = SKSpriteNode(texture: SKTexture(imageNamed: "obstacle"))
+        
+        trigger.position = CGPoint(x: 0, y: -180)
+        
+        trigger.setScale(0.1)
+        trigger.name = "trigger"
+        trigger.alpha = 0
+        
+        trigger.physicsBody = SKPhysicsBody(rectangleOf: trigger.size)
+        trigger.physicsBody?.categoryBitMask = CollisionBitMask.triggerCategory
+        trigger.physicsBody?.collisionBitMask = CollisionBitMask.playerCategory
+        trigger.physicsBody?.contactTestBitMask = CollisionBitMask.playerCategory
+        trigger.physicsBody?.isDynamic = false
+        trigger.physicsBody?.affectedByGravity = false
+        
+        return trigger
     }
     
     func random() -> CGFloat{

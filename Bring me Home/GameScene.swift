@@ -20,14 +20,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var score = Int(0)
     var scoreLbl = SKLabelNode()
-    var highscoreLbl = SKLabelNode()
-    var taptoplayLbl = SKLabelNode()
+    var playAgainLbl = SKLabelNode()
+    var youWinLbl = SKLabelNode()
     var restartBtn = SKSpriteNode()
     var pauseBtn = SKSpriteNode()
     var logoImg = SKSpriteNode()
     var groundPair = SKNode()
     var moveAndRemove = SKAction()
     var obstacle = SKNode()
+    
+    var trigger = SKSpriteNode()
     
     var buttonRight = SKSpriteNode()
     var buttonLeft = SKSpriteNode()
@@ -57,7 +59,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func collisionBetween(player: SKNode, object: SKNode) {
-        
+        var actionArray = [SKAction]()
+        actionArray.append(SKAction.moveTo(x: self.position.x + 800, duration: 0.5))
         if object.name == "ground" {
             print("collision with ground")
         } else if object.name == "obstacle" && !isGameOver {
@@ -66,11 +69,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             isGameOver = true
             self.player.texture = SKTexture(imageNamed: "chibi-lose")
             self.player.removeAllActions()
+            createGameOverText(text: "You Lose! :(", miniText: "Try Again?")
             createRestartBtn()
-        } else if object.name == "trigger" {
+        } else if object.name == "trigger" && !isGameOver {
             print("collision with trigger")
-            //let x: Float = Float(plate2.position.x) + 5000
-            //plate2.run(actionArray[0])
+            let groundRight = groundPair.children[1]
+            groundRight.run(actionArray[0])
+        } else if object.name == "home" && !isGameOver {
+            print("collision with home")
+            isGameOver = true
+            self.player.removeAllActions()
+            createGameOverText(text: "You Win!", miniText: "Play Again?")
+            createRestartBtn()
         }
     }
     
@@ -125,8 +135,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     switch button {
                     case buttonLeft:
                         player.run(SKAction.moveTo(x: player.position.x - 100, duration: 0.5))
+                        player.texture = SKTexture(imageNamed: "chibi-left")
                     case buttonRight:
                         player.run(SKAction.moveTo(x: player.position.x + 100, duration: 0.5))
+                        player.texture = SKTexture(imageNamed: "chibi")
                     case buttonJump:
                         //player.run(SKAction.moveTo(y: player.position.y + 200, duration: 0.5))
                         player.run(SKAction.applyImpulse(CGVector(dx: 0, dy: 500), duration: 0.3))
@@ -150,12 +162,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let location = touch.location(in: self)
             
             for button in [buttonLeft, buttonRight] {
-                if button.contains(location) {//&& pressedButtons.index(of: button) == nil {
+                if button.contains(location) && !isGameOver {//&& pressedButtons.index(of: button) == nil {
                     switch button {
                     case buttonLeft:
                         player.run(SKAction.moveTo(x: player.position.x - 100, duration: 0.5))
+                        player.texture = SKTexture(imageNamed: "chibi-left")
                     case buttonRight:
                         player.run(SKAction.moveTo(x: player.position.x + 100, duration: 0.5))
+                        player.texture = SKTexture(imageNamed: "chibi")
                     default:
                         player.run(SKAction.moveTo(y: player.position.x, duration: 0.5))
                     }
@@ -225,13 +239,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.player = createPlayer()
         self.addChild(player)
         
-        self.obstacle.addChild(createObstacle(position: CGPoint(x: -443.436, y: -156.058), alpha: 1, rotation: 0))
+        self.trigger = createTrigger()
+        self.addChild(trigger)
+        
+        //self.obstacle.addChild(createObstacle(position: CGPoint(x: -400.436, y: -156.058), alpha: 1, rotation: 0))
         self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: -116.058), alpha: 0, rotation: -(CGFloat.pi/2)))
         self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: 0), alpha: 0, rotation: -(CGFloat.pi/2)))
         self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: 116.058), alpha: 0, rotation: -(CGFloat.pi/2)))
         self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: 116.058*2), alpha: 0, rotation: -(CGFloat.pi/2)))
         self.obstacle.addChild(createObstacle(position: CGPoint(x: -873.436, y: 116.058*3), alpha: 0, rotation: -(CGFloat.pi/2)))
-
+        
+        
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: 130, y: -390), alpha: 0, rotation: 0))
+        self.obstacle.addChild(createObstacle(position: CGPoint(x: 230, y: -390), alpha: 0, rotation: 0))
+        
         self.addChild(obstacle)
         
         createRightBtn()
