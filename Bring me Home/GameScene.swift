@@ -17,7 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var graphs = [String : GKGraph]()
     var background = SKSpriteNode()
     var rumah = SKSpriteNode()
-    
+    var isWin = Bool(false)
     var score = Int(0)
     var scoreLbl = SKLabelNode()
     var playAgainLbl = SKLabelNode()
@@ -29,6 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var moveAndRemove = SKAction()
     var obstacle = SKNode()
     
+    var life = Int(5)
     var jatoh = SKSpriteNode()
     
     var cloud = SKNode()
@@ -78,6 +79,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             isGameOver = true
             self.player.texture = SKTexture(imageNamed: "chibi-lose")
             self.player.removeAllActions()
+            life -= 1
             createGameOverText(text: "You Lose! :(", miniText: "Try Again?")
             createRestartBtn()
         } else if object.name == "trigger" && !isGameOver {
@@ -87,6 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else if object.name == "home" && !isGameOver {
             print("collision with home")
             isGameOver = true
+            isWin = true
             self.player.removeAllActions()
             createGameOverText(text: "You Win!", miniText: "Play Again?")
             createRestartBtn()
@@ -95,6 +98,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             isGameOver = true
             self.player.texture = SKTexture(imageNamed: "chibi-lose")
             self.player.removeAllActions()
+            life -= 1
             createGameOverText(text: "You Lose! :(", miniText: "Try Again?")
             createRestartBtn()
             let grin = SKLabelNode()
@@ -219,8 +223,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         isGameOver = false
         gameStarted = false
         jatohTrigger = false
-        score = 0
         createScene()
+        if isWin {
+            isWin = false
+            score = 0
+            life = 5
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -264,6 +272,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createBackground()
         self.cloud = createCloud()
         self.addChild(cloud)
+        
+        self.scoreLbl = createScoreLabel()
+        self.addChild(scoreLbl)
 
         self.groundPair = self.createGround()
         self.addChild(self.groundPair)

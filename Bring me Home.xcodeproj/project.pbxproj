@@ -22,6 +22,8 @@
 		0D4DB06A229AD7DC009FFAA1 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4DB069229AD7DC009FFAA1 /* home.png */; };
 		0D4DB06C229AD851009FFAA1 /* chibi-left.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4DB06B229AD851009FFAA1 /* chibi-left.png */; };
 		0D4DB070229AE8FE009FFAA1 /* buttonRestart.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4DB06F229AE8FE009FFAA1 /* buttonRestart.png */; };
+		0D85DDED229B727100D82C6A /* logo 3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D85DDEB229B727100D82C6A /* logo 3x.png */; };
+		0D85DDEF229B72C000D82C6A /* logo 2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D85DDEE229B72C000D82C6A /* logo 2x.png */; };
 		0DABA6C52298EC5000F902F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DABA6C42298EC5000F902F5 /* AppDelegate.swift */; };
 		0DABA6C72298EC5000F902F5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0DABA6C62298EC5000F902F5 /* GameScene.sks */; };
 		0DABA6C92298EC5000F902F5 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0DABA6C82298EC5000F902F5 /* Actions.sks */; };
@@ -48,6 +50,8 @@
 		0D4DB069229AD7DC009FFAA1 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		0D4DB06B229AD851009FFAA1 /* chibi-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chibi-left.png"; sourceTree = "<group>"; };
 		0D4DB06F229AE8FE009FFAA1 /* buttonRestart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonRestart.png; sourceTree = "<group>"; };
+		0D85DDEB229B727100D82C6A /* logo 3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo 3x.png"; sourceTree = "<group>"; };
+		0D85DDEE229B72C000D82C6A /* logo 2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo 2x.png"; sourceTree = "<group>"; };
 		0DABA6C12298EC5000F902F5 /* Bring me Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bring me Home.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DABA6C42298EC5000F902F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DABA6C62298EC5000F902F5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -74,6 +78,8 @@
 		0D1BE39A229915DE00528E0E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0D85DDEE229B72C000D82C6A /* logo 2x.png */,
+				0D85DDEB229B727100D82C6A /* logo 3x.png */,
 				0D4DB06F229AE8FE009FFAA1 /* buttonRestart.png */,
 				0D4DB06B229AD851009FFAA1 /* chibi-left.png */,
 				0D4DB069229AD7DC009FFAA1 /* home.png */,
@@ -192,11 +198,13 @@
 				0DABA6D02298EC5000F902F5 /* Main.storyboard in Resources */,
 				0D1BE3AC2299386B00528E0E /* buttonJump.png in Resources */,
 				0DABA6C72298EC5000F902F5 /* GameScene.sks in Resources */,
+				0D85DDED229B727100D82C6A /* logo 3x.png in Resources */,
 				0D1BE3A8229935CA00528E0E /* buttonRight.png in Resources */,
 				0D1BE3A12299295900528E0E /* player.png in Resources */,
 				0D1BE3A42299295900528E0E /* obstacle.png in Resources */,
 				0D1BE3A622992F6400528E0E /* ground.png in Resources */,
 				0D1BE3A32299295900528E0E /* chibi.png in Resources */,
+				0D85DDEF229B72C000D82C6A /* logo 2x.png in Resources */,
 				0D4DB070229AE8FE009FFAA1 /* buttonRestart.png in Resources */,
 				0DABA6D22298EC5200F902F5 /* Assets.xcassets in Resources */,
 				0D1BE3AB2299386B00528E0E /* buttonLeft.png in Resources */,

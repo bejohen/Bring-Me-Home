@@ -169,12 +169,12 @@ extension GameScene{
     
     func createScoreLabel() -> SKLabelNode {
         let scoreLbl = SKLabelNode()
-        scoreLbl.position = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2 + self.frame.height / 2.6)
-        scoreLbl.text = "\(score)"
+        scoreLbl.position = CGPoint(x: 750, y: 350)
+        scoreLbl.text = "Life : \(life)"
         scoreLbl.zPosition = 5
-        scoreLbl.fontSize = 50
-        scoreLbl.fontName = "HelveticaNeue-Bold"
-        
+        scoreLbl.fontSize = 30
+        scoreLbl.fontName = "SF Pro Text-Medium"
+        scoreLbl.fontColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
         let scoreBg = SKShapeNode()
         scoreBg.position = CGPoint(x: 0, y: 0)
         scoreBg.path = CGPath(roundedRect: CGRect(x: CGFloat(-50), y: CGFloat(-30), width: CGFloat(100), height: CGFloat(100)), cornerWidth: 50, cornerHeight: 50, transform: nil)
@@ -182,7 +182,7 @@ extension GameScene{
         scoreBg.strokeColor = UIColor.clear
         scoreBg.fillColor = scoreBgColor
         scoreBg.zPosition = -1
-        scoreLbl.addChild(scoreBg)
+        //scoreLbl.addChild(scoreBg)
         return scoreLbl
     }
     
@@ -216,7 +216,7 @@ extension GameScene{
         youWinLbl.fontColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)
         youWinLbl.zPosition = 5
         youWinLbl.fontSize = 70
-        youWinLbl.fontName = "SF Pro Text Bold"
+        youWinLbl.fontName = "SF Pro Text-Bold"
         //youWinLbl.setScale(0)
         
         playAgainLbl.position = CGPoint(x:0, y:120)
@@ -224,7 +224,7 @@ extension GameScene{
         playAgainLbl.fontColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)
         playAgainLbl.zPosition = 5
         playAgainLbl.fontSize = 28
-        playAgainLbl.fontName = "SF Pro Text Medium"
+        playAgainLbl.fontName = "SF Pro Text-Medium"
         //playAgainLbl.setScale(0)
         
         self.addChild(youWinLbl)
